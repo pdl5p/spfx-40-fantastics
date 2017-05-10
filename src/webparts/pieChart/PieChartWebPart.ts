@@ -21,7 +21,7 @@ import { IPieChartWebPartProps } from './IPieChartWebPartProps';
 
 //Imports property pane custom fields
 import { PropertyFieldCustomList, CustomListFieldType } from 'sp-client-custom-fields/lib/PropertyFieldCustomList';
-import { PropertyFieldColorPicker } from 'sp-client-custom-fields/lib/PropertyFieldColorPicker';
+import { PropertyFieldColorPickerMini } from 'sp-client-custom-fields/lib/PropertyFieldColorPickerMini';
 import { PropertyFieldFontPicker } from 'sp-client-custom-fields/lib/PropertyFieldFontPicker';
 import { PropertyFieldFontSizePicker } from 'sp-client-custom-fields/lib/PropertyFieldFontSizePicker';
 import { PropertyFieldDimensionPicker } from 'sp-client-custom-fields/lib/PropertyFieldDimensionPicker';
@@ -72,12 +72,12 @@ export default class PieChartWebPart extends BaseClientSideWebPart<IPieChartWebP
     this.domElement.innerHTML = html;
 
         var data = {
-        labels: this.getDataTab(strings.Label),
+        labels: this.getDataTab("Label"),
         datasets: [
             {
-                data: this.getDataTab(strings.Value),
-                backgroundColor: this.getDataTab(strings.Color),
-                hoverBackgroundColor: this.getDataTab(strings.HoverColor)
+                data: this.getDataTab("Value"),
+                backgroundColor: this.getDataTab("Color"),
+                hoverBackgroundColor: this.getDataTab("Hover Color")
             }
         ]
       };
@@ -155,10 +155,10 @@ export default class PieChartWebPart extends BaseClientSideWebPart<IPieChartWebP
                   value: this.properties.items,
                   headerText: strings.ManageItems,
                   fields: [
-                    { title: strings.Label, required: true, type: CustomListFieldType.string },
-                    { title: strings.Value, required: true, type: CustomListFieldType.number },
-                    { title: strings.Color, required: true, type: CustomListFieldType.color },
-                    { title: strings.HoverColor, required: true, type: CustomListFieldType.color }
+                    { id: 'Label', title: "Label", required: true, type: CustomListFieldType.string },
+                    { id: 'Value', title: "Value", required: true, type: CustomListFieldType.number },
+                    { id: 'Color', title: "Color", required: true, type: CustomListFieldType.color },
+                    { id: 'Hover Color', title: "Hover Color", required: true, type: CustomListFieldType.color }
                   ],
                   onPropertyChange: this.onPropertyPaneFieldChanged,
                   context: this.context,
@@ -235,7 +235,7 @@ export default class PieChartWebPart extends BaseClientSideWebPart<IPieChartWebP
                   properties: this.properties,
                   key: 'pieChartTitleSizeField'
                 }),
-                PropertyFieldColorPicker('titleColor', {
+                PropertyFieldColorPickerMini('titleColor', {
                   label: strings.TitleColor,
                   initialColor: this.properties.titleColor,
                   onPropertyChange: this.onPropertyPaneFieldChanged,
@@ -277,7 +277,7 @@ export default class PieChartWebPart extends BaseClientSideWebPart<IPieChartWebP
                   properties: this.properties,
                   key: 'pieChartLegendSizeField'
                 }),
-                PropertyFieldColorPicker('legendColor', {
+                PropertyFieldColorPickerMini('legendColor', {
                   label: strings.LegendColor,
                   initialColor: this.properties.legendColor,
                   onPropertyChange: this.onPropertyPaneFieldChanged,

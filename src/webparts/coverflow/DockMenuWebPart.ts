@@ -22,7 +22,7 @@ import { IDockMenuWebPartProps } from './IDockMenuWebPartProps';
 import { PropertyFieldCustomList, CustomListFieldType } from 'sp-client-custom-fields/lib/PropertyFieldCustomList';
 import { PropertyFieldFontPicker } from 'sp-client-custom-fields/lib/PropertyFieldFontPicker';
 import { PropertyFieldFontSizePicker } from 'sp-client-custom-fields/lib/PropertyFieldFontSizePicker';
-import { PropertyFieldColorPicker } from 'sp-client-custom-fields/lib/PropertyFieldColorPicker';
+import { PropertyFieldColorPickerMini } from 'sp-client-custom-fields/lib/PropertyFieldColorPickerMini';
 import { PropertyFieldAlignPicker } from 'sp-client-custom-fields/lib/PropertyFieldAlignPicker';
 
 //Loads external CSS
@@ -179,12 +179,12 @@ export default class DockMenuWebPart extends BaseClientSideWebPart<IDockMenuWebP
                   value: this.properties.items,
                   headerText: "Manage Items",
                   fields: [
-                    { title: 'Title', required: true, type: CustomListFieldType.string },
-                    { title: 'Enabled', required: true, type: CustomListFieldType.boolean },
-                    { title: 'Picture', required: true, type: CustomListFieldType.string },
+                    { id: 'Title', title: 'Title', required: true, type: CustomListFieldType.string },
+                    { id: 'Enabled', title: 'Enabled', required: true, type: CustomListFieldType.boolean },
+                    { id: 'Picture', title: 'Picture', required: true, type: CustomListFieldType.picture },
                     //{ title: 'Picture', required: true, type: CustomListFieldType.picture },
-                    { title: 'Link Url', required: false, type: CustomListFieldType.string, hidden: true },
-                    { title: 'Link Text', required: false, type: CustomListFieldType.string, hidden: true }
+                    { id: 'Link Url', title: 'Link Url', required: false, type: CustomListFieldType.string, hidden: true },
+                    { id: 'Link Text', title: 'Link Text', required: false, type: CustomListFieldType.string, hidden: true }
                   ],
                   onPropertyChange: this.onPropertyPaneFieldChanged,
                   context: this.context,
@@ -301,14 +301,14 @@ export default class DockMenuWebPart extends BaseClientSideWebPart<IDockMenuWebP
                   properties: this.properties,
                   key: "coverflowFontSizeField"
                 }),
-                PropertyFieldColorPicker('textPanelFontColor', {
+                PropertyFieldColorPickerMini('textPanelFontColor', {
                   label: strings.TextPanelFontColorFieldLabel,
                   initialColor: this.properties.textPanelFontColor,
                   onPropertyChange: this.onPropertyPaneFieldChanged,
                   properties: this.properties,
                   key: "coverflowFontColorField"
                 }),
-                PropertyFieldColorPicker('textPanelBackgroundColor', {
+                PropertyFieldColorPickerMini('textPanelBackgroundColor', {
                   label: strings.TextPanelBackgroundColorFieldLabel,
                   initialColor: this.properties.textPanelBackgroundColor,
                   onPropertyChange: this.onPropertyPaneFieldChanged,

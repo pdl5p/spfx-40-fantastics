@@ -19,7 +19,7 @@ import * as strings from 'TilesMenuStrings';
 import { ITilesMenuWebPartProps } from './ITilesMenuWebPartProps';
 
 //Imports property pane custom fields
-import { PropertyFieldColorPicker } from 'sp-client-custom-fields/lib/PropertyFieldColorPicker';
+import { PropertyFieldColorPickerMini } from 'sp-client-custom-fields/lib/PropertyFieldColorPickerMini';
 import { PropertyFieldFontPicker } from 'sp-client-custom-fields/lib/PropertyFieldFontPicker';
 import { PropertyFieldFontSizePicker } from 'sp-client-custom-fields/lib/PropertyFieldFontSizePicker';
 import { PropertyFieldAlignPicker } from 'sp-client-custom-fields/lib/PropertyFieldAlignPicker';
@@ -172,11 +172,11 @@ export default class TilesMenuWebPart extends BaseClientSideWebPart<ITilesMenuWe
                   value: this.properties.items,
                   headerText: strings.ManageItems,
                   fields: [
-                    { title: 'Title', required: true, type: CustomListFieldType.string },
-                    { title: 'Enable', required: true, type: CustomListFieldType.boolean },
-                    { title: 'Description', required: false, hidden: true, type: CustomListFieldType.string },
-                    { title: 'Picture', required: true, hidden: true, type: CustomListFieldType.string },
-                    { title: 'Link Url', required: true, hidden: true, type: CustomListFieldType.string }
+                    { id: 'Title', title: 'Title', required: true, type: CustomListFieldType.string },
+                    { id: 'Enable', title: 'Enable', required: true, type: CustomListFieldType.boolean },
+                    { id: 'Description', title: 'Description', required: false, hidden: true, type: CustomListFieldType.string },
+                    { id: 'Picture', title: 'Picture', required: true, hidden: true, type: CustomListFieldType.picture },
+                    { id: 'Link Url', title: 'Link Url', required: true, hidden: true, type: CustomListFieldType.string }
                   ],
                   onPropertyChange: this.onPropertyPaneFieldChanged,
                   context: this.context,
@@ -260,14 +260,14 @@ export default class TilesMenuWebPart extends BaseClientSideWebPart<ITilesMenuWe
                   properties: this.properties,
                   key: 'tilesMenuFontSizeField'
                 }),
-                PropertyFieldColorPicker('textPanelFontColor', {
+                PropertyFieldColorPickerMini('textPanelFontColor', {
                   label: strings.TextPanelFontColorFieldLabel,
                   initialColor: this.properties.textPanelFontColor,
                   onPropertyChange: this.onPropertyPaneFieldChanged,
                   properties: this.properties,
                   key: 'tilesMenuFontColorField'
                 }),
-                PropertyFieldColorPicker('textPanelBackgroundColor', {
+                PropertyFieldColorPickerMini('textPanelBackgroundColor', {
                   label: strings.TextPanelBackgroundColorFieldLabel,
                   initialColor: this.properties.textPanelBackgroundColor,
                   onPropertyChange: this.onPropertyPaneFieldChanged,
@@ -295,7 +295,7 @@ export default class TilesMenuWebPart extends BaseClientSideWebPart<ITilesMenuWe
                   max: 50,
                   step: 1
                 }),
-                PropertyFieldColorPicker('borderColor', {
+                PropertyFieldColorPickerMini('borderColor', {
                   label: strings.BorderColorFieldLabel,
                   initialColor: this.properties.borderColor,
                   onPropertyChange: this.onPropertyPaneFieldChanged,

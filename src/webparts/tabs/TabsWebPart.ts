@@ -13,13 +13,14 @@ import {
 } from '@microsoft/sp-webpart-base';
 import { DisplayMode, Version } from '@microsoft/sp-core-library';
 import { SPComponentLoader } from '@microsoft/sp-loader';
+import { Environment, EnvironmentType } from '@microsoft/sp-core-library';
 
 import * as strings from 'TabsStrings';
 import { ITabsWebPartProps } from './ITabsWebPartProps';
 
 //Imports property pane custom fields
 import { PropertyFieldCustomList, CustomListFieldType } from 'sp-client-custom-fields/lib/PropertyFieldCustomList';
-import { PropertyFieldColorPicker } from 'sp-client-custom-fields/lib/PropertyFieldColorPicker';
+import { PropertyFieldColorPickerMini } from 'sp-client-custom-fields/lib/PropertyFieldColorPickerMini';
 
 import * as $ from 'jquery';
 
@@ -54,6 +55,18 @@ export default class TabsWebPart extends BaseClientSideWebPart<ITabsWebPartProps
    * Renders HTML code
    */
   public render(): void {
+
+    if (Environment.type === EnvironmentType.ClassicSharePoint) {
+      var errorHtml = '';
+      errorHtml += '<div style="color: red;">';
+      errorHtml += '<div style="display:inline-block; vertical-align: middle;"><i class="ms-Icon ms-Icon--Error" style="font-size: 20px"></i></div>';
+      errorHtml += '<div style="display:inline-block; vertical-align: middle;margin-left:7px;"><span>';
+      errorHtml += strings.ErrorClassicSharePoint;
+      errorHtml += '</span></div>';
+      errorHtml += '</div>';
+      this.domElement.innerHTML = errorHtml;
+      return;
+    }
 
     var html = '';
     html += `
@@ -435,7 +448,7 @@ Main components
                   value: this.properties.tabs,
                   headerText: strings.ManageTabs,
                   fields: [
-                    { title: 'Title', required: true, type: CustomListFieldType.string }
+                    { id: 'Title', title: 'Title', required: true, type: CustomListFieldType.string }
                   ],
                   onPropertyChange: this.onPropertyPaneFieldChanged,
                   context: this.context,
@@ -455,14 +468,14 @@ Main components
             {
               groupName: strings.LayoutGroupName,
               groupFields: [
-                PropertyFieldColorPicker('disableColor', {
+                PropertyFieldColorPickerMini('disableColor', {
                   label: strings.DisableColor,
                   initialColor: this.properties.disableColor,
                   onPropertyChange: this.onPropertyPaneFieldChanged,
                   properties: this.properties,
                   key: 'tabsDisableColorField'
                 }),
-                PropertyFieldColorPicker('selectedColor', {
+                PropertyFieldColorPickerMini('selectedColor', {
                   label: strings.SelectedColor,
                   initialColor: this.properties.selectedColor,
                   onPropertyChange: this.onPropertyPaneFieldChanged,

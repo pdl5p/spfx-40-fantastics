@@ -21,7 +21,7 @@ import { IRadarChartWebPartProps } from './IRadarChartWebPartProps';
 
 //Imports property pane custom fields
 import { PropertyFieldCustomList, CustomListFieldType } from 'sp-client-custom-fields/lib/PropertyFieldCustomList';
-import { PropertyFieldColorPicker } from 'sp-client-custom-fields/lib/PropertyFieldColorPicker';
+import { PropertyFieldColorPickerMini } from 'sp-client-custom-fields/lib/PropertyFieldColorPickerMini';
 import { PropertyFieldFontPicker } from 'sp-client-custom-fields/lib/PropertyFieldFontPicker';
 import { PropertyFieldFontSizePicker } from 'sp-client-custom-fields/lib/PropertyFieldFontSizePicker';
 import { PropertyFieldDimensionPicker } from 'sp-client-custom-fields/lib/PropertyFieldDimensionPicker';
@@ -72,10 +72,10 @@ export default class RadarChartWebPart extends BaseClientSideWebPart<IRadarChart
     this.domElement.innerHTML = html;
 
         var data = {
-        labels: this.getDataTab(strings.Label),
+        labels: this.getDataTab("Label"),
         datasets: [
             {
-                data: this.getDataTab(strings.Value),
+                data: this.getDataTab("Value"),
                 backgroundColor: this.properties.fillColor,
                 pointStyle: this.properties.pointStyle,
                 fill: this.properties.fill,
@@ -167,8 +167,8 @@ export default class RadarChartWebPart extends BaseClientSideWebPart<IRadarChart
                   value: this.properties.items,
                   headerText: strings.ManageItems,
                   fields: [
-                    { title: strings.Label, required: true, type: CustomListFieldType.string },
-                    { title: strings.Value, required: true, type: CustomListFieldType.number }
+                    { id: 'Label', title: "Label", required: true, type: CustomListFieldType.string },
+                    { id: 'Value', title: "Value", required: true, type: CustomListFieldType.number }
                   ],
                   onPropertyChange: this.onPropertyPaneFieldChanged,
                   context: this.context,
@@ -224,7 +224,7 @@ export default class RadarChartWebPart extends BaseClientSideWebPart<IRadarChart
                     {key: 'dash', text: 'dash'}
                   ]
                 }),
-                PropertyFieldColorPicker('fillColor', {
+                PropertyFieldColorPickerMini('fillColor', {
                   label: strings.FillColor,
                   initialColor: this.properties.fillColor,
                   onPropertyChange: this.onPropertyPaneFieldChanged,
@@ -269,7 +269,7 @@ export default class RadarChartWebPart extends BaseClientSideWebPart<IRadarChart
                   properties: this.properties,
                   key: 'radarChartTitleSizeField'
                 }),
-                PropertyFieldColorPicker('titleColor', {
+                PropertyFieldColorPickerMini('titleColor', {
                   label: strings.TitleColor,
                   initialColor: this.properties.titleColor,
                   onPropertyChange: this.onPropertyPaneFieldChanged,

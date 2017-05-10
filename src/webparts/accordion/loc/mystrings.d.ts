@@ -5,8 +5,6 @@ declare interface IAccordionStrings {
   LayoutGroupName: string;
   DescriptionFieldLabel: string;
   Inline: string;
-  Mode: string;
-  Theme: string;
   ManageAccordion: string;
   Accordion: string;
   DisableColor: string;
@@ -15,6 +13,7 @@ declare interface IAccordionStrings {
   Animate: string;
   Speed: string;
   HeightStyle: string;
+  ErrorClassicSharePoint: string;
 }
 
 declare module 'AccordionStrings' {

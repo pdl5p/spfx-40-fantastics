@@ -6,8 +6,6 @@ define([], function() {
     "LayoutGroupName": "Layout",
     "DescriptionFieldLabel": "Description Field",
     "Inline": "Inline",
-    "Mode": "Toolbar (must refresh page)",
-    "Theme": "Theme (must refresh page)",
     "ManageAccordion": "Manage Tabs",
     "Tabs": "Tabs",
     "DisableColor": "Inactive Tab Color",
@@ -15,6 +13,7 @@ define([], function() {
     "Collapsible": "Collapsible",
     "Animate": "Animate",
     "Speed": "Speed (ms)",
-    "HeightStyle": "Height Style"
+    "HeightStyle": "Height Style",
+    "ErrorClassicSharePoint": "Sorry, but this Web Part does not work in a classic SharePoint site, but only in a modern site."
   }
 });
